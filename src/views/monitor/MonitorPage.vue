@@ -2,7 +2,7 @@
   <div class="monitor-container">
     <div class="monitor-frame-wrapper">
       <iframe
-        src="https://tz.gyxxk.com/"
+        src="https://tz.******.com/"
         class="monitor-frame"
         frameborder="0"
         allowfullscreen
