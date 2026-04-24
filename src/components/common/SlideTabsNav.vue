@@ -76,13 +76,15 @@ import IconMore from '@/components/icons/IconMore.vue';
 
 import {
 
-  IconServer,     
+  IconServer,
 
   IconChartBar,
 
-  IconHeadset   
+  IconHeadset,
 
-} from '@tabler/icons-vue';  
+  IconActivity
+
+} from '@tabler/icons-vue';
 
 
 
@@ -214,7 +216,9 @@ export default {
 
           wallet: { title: 'Wallet', path: '/wallet/deposit', name: 'Deposit', icon: 'IconWallet', i18nKey: 'wallet' },
 
-          profile: { title: 'Profile', path: '/profile', name: 'Profile', icon: 'IconUser', i18nKey: 'profile' }
+          profile: { title: 'Profile', path: '/profile', name: 'Profile', icon: 'IconUser', i18nKey: 'profile' },
+
+          monitor: { title: 'Monitor', path: '/monitor', name: 'Monitor', icon: 'IconActivity', i18nKey: 'monitor' }
 
         };
 
@@ -264,6 +268,8 @@ export default {
         case 'IconWallet': return IconWallet;
 
         case 'IconUser': return IconUser;
+
+        case 'IconActivity': return IconActivity;
 
         default: return null;
 

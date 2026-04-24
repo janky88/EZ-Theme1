@@ -1536,6 +1536,33 @@ const copySubscriptionUrl = () => {
 
 
 
+const getGiftCardSuccessMsg = (type, value) => {
+  switch (type) {
+    case 1: return t('profile.giftCardSuccessBalance', { value: (value / 100).toFixed(2) });
+    case 2: return t('profile.giftCardSuccessTime', { value });
+    case 3: return t('profile.giftCardSuccessTraffic', { value });
+    case 4: return t('profile.giftCardSuccessReset');
+    case 5: return value > 0
+              ? t('profile.giftCardSuccessPlan', { value })
+              : t('profile.giftCardSuccessPlanPermanent');
+    default: return t('profile.giftCardSuccess');
+  }
+};
+
+const getGiftCardErrorMsg = (backendMsg) => {
+  const errorMap = {
+    'The gift card does not exist':                     t('profile.giftCardErrNotExist'),
+    'The gift card is not yet valid':                   t('profile.giftCardErrNotYetValid'),
+    'The gift card has expired':                        t('profile.giftCardErrExpired'),
+    'The gift card usage limit has been reached':       t('profile.giftCardErrLimitReached'),
+    'The gift card has already been used by this user': t('profile.giftCardErrAlreadyUsed'),
+    'Not suitable gift card type':                      t('profile.giftCardErrNotSuitable'),
+    'Unknown gift card type':                           t('profile.giftCardErrUnknownType'),
+    'Save failed':                                      t('profile.giftCardErrSaveFailed'),
+  };
+  return errorMap[backendMsg] || t('profile.giftCardError');
+};
+
 const redeemGiftCard = async () => {
 
   if (!giftCardCode.value) {
@@ -1560,7 +1587,7 @@ const redeemGiftCard = async () => {
 
     if (response && response.data) {
 
-      success(t('profile.giftCardSuccess'));
+      success(getGiftCardSuccessMsg(response.type, response.value));
 
       giftCardCode.value = '';
 
@@ -1573,7 +1600,11 @@ const redeemGiftCard = async () => {
 
     console.error('Failed to redeem gift card:', err);
 
-    showError(t('profile.giftCardError'));
+    const errMsg = err?.response?.message
+      ? getGiftCardErrorMsg(err.response.message)
+      : t('profile.giftCardError');
+
+    showError(errMsg);
 
   } finally {
 

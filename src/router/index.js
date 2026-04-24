@@ -63,8 +63,10 @@ const getActiveNavForRoute = (routeName) => {
 
     wallet: 'Deposit',
 
-    profile: 'Profile'
-    
+    profile: 'Profile',
+
+    monitor: 'Monitor'
+
   };
 
   // 路由名称 -> 导航名称 映射（与 SlideTabsNav 中的 item.name 对齐）
@@ -76,7 +78,8 @@ const getActiveNavForRoute = (routeName) => {
     OrderList: 'Orders',
     TrafficLog: 'Traffic',
     Deposit: 'Wallet',
-    Profile: 'Profile'
+    Profile: 'Profile',
+    Monitor: 'Monitor'
   };
 
   // 如果当前路由匹配第三个导航项，则返回第三项对应的导航名
@@ -582,7 +585,7 @@ const routes = [
 
           requiresAuth: true,
 
-          get activeNav() { return getActiveNavForRoute('Deposit'); } 
+          get activeNav() { return getActiveNavForRoute('Deposit'); }
         },
 
         beforeEnter: (to, from, next) => {
@@ -596,6 +599,26 @@ const routes = [
             next();
 
           }
+
+        }
+
+      },
+
+      {
+
+        path: 'monitor',
+
+        name: 'Monitor',
+
+        component: () => import('@/views/monitor/MonitorPage.vue'),
+
+        meta: {
+
+          titleKey: 'menu.monitor',
+
+          requiresAuth: true,
+
+          get activeNav() { return getActiveNavForRoute('Monitor'); }
 
         }
 
